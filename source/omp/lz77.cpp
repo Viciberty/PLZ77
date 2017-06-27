@@ -40,10 +40,11 @@ along with LZ77 Compression Tool.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <stdexcept>
 #include "omp.h"
-
+#include <sys/time.h>
+#include <stdlib.h>
 const int WINDOW_SIZE = 4096;
 const int DECOMP_BUFF_SIZE = 72;
-
+using namespace std;
 class Llist
 {
   public:
@@ -335,31 +336,32 @@ int main(int argc, char *argv[])
         {
             throw std::runtime_error("Could not open input file '" + filename + "'");
         }
+	
+	struct timeval start,end;
+	gettimeofday(&start,NULL);
 
         if (mode.compare("compress") == 0)
         {
             // Send message to user of the mode we chose
             std::cout << "Compressing '" + filename + "'" << std::endl;
-           #pragma omp parallel 
-	{
-	    #pragma omp single	
+	{ 
 	    Compress(data.get(), size, filename);
-        }
+	}
 	}
         else if (mode.compare("decompress") == 0)
         {
             // Send message to user of the mode we chose
             std::cout << "Decompressing '" + filename + "'" << std::endl;
-        #pragma omp parallel
-	{
-	    #pragma omp single
 	    Decompress(data.get(), size, filename);
-	}
 	}
         else
         {
             std::cout << "Mode '" + mode + "' is not valid, expected 'compress' or 'decompress'" << std::endl;
         }
+	gettimeofday(&end,NULL);
+	long timeuse = 1000000 * ( end.tv_sec - start.tv_sec ) + end.tv_usec - start.tv_usec; 
+	printf("Standard time=%f\n",timeuse /1000000.0);
+	
     }
     catch (std::exception &ex)
     {
@@ -372,41 +374,76 @@ int main(int argc, char *argv[])
 void Compress(const char *memblock, const int size, const std::string &fn)
 {
     const std::string filename = fn + ".comp";
-    int winstart = 0;
-    int current = 0;
-    int temp;
-    int check;
     BitBuffer bits(filename);
     HashTable hash;
     int j = 0;
-    int n = 2;
-    int group = size / n;
+    int thread = 2;
+    int group = size / thread;
     int i = 0, cc_size = 0 ;
-#pragma omp parallel for private(i)
-for (j=0;j<n;j++)
+    
+    int winstart = 0;
+    int current = 0;
+    int temp,check;
+//Multiple filename
+    string filename_thread[thread];
+    char str[25];
+    for (i=0;i<thread;i++) { sprintf(str,"%d",i); filename_thread[i] = fn + str + ".comp"; }
+    typedef BitBuffer* BB;
+    BB bits_thread[thread];
+    for (i=0;i<thread;i++) bits_thread[i] = new BitBuffer(filename_thread[i]);
+    HashTable hash_thread[thread];
+//Multiple memblock
+    char* memblock_thread[thread];
+    for (i=0;i<thread;i++) 
+	{
+    if (i==thread - 1) cc_size= group + size % thread; else cc_size = group;
+    memblock_thread[i] = new char[cc_size];
+    for (j=0;j<cc_size;j++) {*(memblock_thread[i]+j) = memblock[i*group+j];  }
+ }
+    
+#pragma omp parallel for private(i,cc_size,winstart,current,temp,check) shared(group) 
+for (j=0;j<thread;j++)
 {
-    i = j * group ;
-    if (j==n-1) cc_size= group + size % n; else cc_size = group; 
-    while (i - j * group  < cc_size)
+    winstart = 0;
+    current = 0;
+    i = 0;
+    int num = omp_get_thread_num();
+    cout << "number = " << num << "; j=" << j << endl;
+    if (j==thread - 1) cc_size= group + size % thread; else cc_size = group; 
+    
+    while (i < cc_size)
     {
         temp = current;
-        check = find_match(&hash, memblock, winstart, current, cc_size);
-        if (check >= 0)
+	check = find_match(&hash_thread[j], (memblock_thread[j]), winstart, current, cc_size);
+       if (check >= 0)
         {
-            bits.addOne();
-            bits.addBytes(check, current - temp - 4);
+            (*(bits_thread[j])).addOne();
+            (*(bits_thread[j])).addBytes(check, current - temp - 4);
             i += current - temp;
         }
         else
         {
-            bits.addZero();
-            bits.addByte(memblock[current - 1]);
+            (*(bits_thread[j])).addZero();
+            (*(bits_thread[j])).addByte((memblock_thread[j])[current - 1]);
             i++;
         }
+    
     }
  }
+	ifstream ifile;
+	ofstream outfile;
+	string s;
+	char ch;
+	for(i=0;i<thread;i++) 
+	{
+	ifile.open(filename_thread[i],ios::binary);
+	outfile.open(filename,ios::app|ios::binary);
+	while (ifile.get(ch)) outfile << ch ;
+		
+	ifile.close();
+	outfile.close();
+		}
 }
-
 int find_match(HashTable *hash, const char *buff, int &winstart, int &current, const int size)
 {
     int max = 0;
