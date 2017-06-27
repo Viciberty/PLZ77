@@ -1,0 +1,171 @@
+%Title
+%!TEX program = xelatex
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[letterpaper,12pt]{article}
+%Graph
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+    \hypersetup{
+	    colorlinks=true,       % false: boxed links; true: colored links
+	    linkcolor=blue,        % color of internal links
+	    citecolor=blue,        % color of links to bibliography
+	    filecolor=magenta,     % color of file links
+	    urlcolor=blue         
+    }    
+%Font
+\usepackage{xeCJK,indentfirst}         %中文包&XeLaTex
+    \setCJKmainfont[BoldFont=STZhongsong, ItalicFont=STKaiti]{STSong}
+    \setCJKsansfont[BoldFont=STHeiti]{STXihei}
+    \setCJKmonofont{STFangsong}
+\usepackage{fontspec}
+    \setmainfont{Times New Roman}
+    \setsansfont{Arial}
+%Picture
+
+\usepackage{tikz}
+    \usetikzlibrary{arrows}
+\usepackage{asymptote}
+\usepackage{algorithm}  
+\usepackage{algpseudocode}  
+\usepackage{amsmath}  
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm 
+%Algorithm
+\usepackage{listings}
+\usepackage{xcolor}      %代码着色宏包
+\usepackage{CJK}         %显示中文宏包
+ \usepackage{diagbox}
+\lstset{
+    basicstyle=\tt,
+    %行号
+    numbers=left,
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    escapeinside=``,
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
+    %背景框
+    framexleftmargin=1.5mm,
+    frame=shadowbox,
+    %背景色
+    backgroundcolor=\color[RGB]{245,245,244},
+    %样式
+    keywordstyle=\color{blue}\bfseries,
+    identifierstyle=\bf,
+    numberstyle=\color[RGB]{0,192,192},
+    commentstyle=\it\color[RGB]{96,96,96},
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},
+    %显示空格
+    showstringspaces=false
+}
+ \lstset{breaklines}
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\title{LZ77压缩算法并行}
+\author{李瑞鹏，师浩然}
+\date{\today}
+\maketitle
+%----------------------------------------------------------------------------------------
+%	ABSTRACT SECTION
+%----------------------------------------------------------------------------------------
+\begin{abstract}	
+我们先选取了串行的LZ77算法，并介绍了其背景。接着分析了并行算法的实现与并行性。最后我们论述了实验的并行效果。
+\end{abstract}
+%----------------------------------------------------------------------------------------
+%   TEXT SECTION
+%----------------------------------------------------------------------------------------
+\begin{section}{背景介绍}
+    \begin{subsection}{Lempel-Ziv编码}
+        在大数据时代，数据压缩技术有很广泛的应用。对于我们传输的信息，信息熵通常较低，为了使数据能进一步压缩，我们需要增大信息熵。而我们对于信源编码有一类非常流行的技术，而且是通用最优的（即对于任意平稳遍历信源，渐近压缩率接近信源的熵率），而且容易实现。这类算法称为Lempel-Ziv算法，以两篇开创性的论文作者命名。这些算法也称为自适应字典式压缩算法。通常历史上，我们有LZ77（滑动窗Lempel-Ziv算法）与LZ78（树结构Lempel-Ziv算法），有时他们各自分别简称为LZ1与LZ2.在这里我们针对LZ77算法进行并行设计。\\ \par
+
+        然而随着处理器向多核和并行发展的趋势，我们需要对原来的串行算法做一些改进，以提高算法的执行效率。目前主流压缩软件也多用基于LZ77的压缩算法，基本都基于CPU多线程并行压缩，但还没有更多的采用OpenCL等GPU多核异构结构进行并行加速。我们在这里也进行了一些探索。\\ \par
+
+        在本项目中，我们尝试将经典的LZ77压缩算法进行并行尝试，通过OpenMP的技术在多核CPU上进行实现。在压缩算法的实现中，我们需要达到执行时间和压缩率达到一个trade-off，并达到一个尽量高的加速比。接下来我们将介绍下LZ77的算法流程，再介绍并行处理，最后讨论一下并行的效果。  
+
+    \end{subsection}
+
+    \begin{subsection}{LZ77串行算法}
+        这个算法是在1977年的文章提出的算法，其主要思想是在一个过去字符窗口的任何地方通过查找最长匹配进行字符串编码，同时利用指向窗中匹配位置和匹配长度的指针表示字符串。这个基本算法有很多变式，我们采用的是Storer和Szymanski给出的描述。\\ \par
+        假定有限字母表的字符串$x_1,x_2,\cdots$需要被压缩。字符串$x_1,x_2,\cdots,x_n$的解析S是将该字符串划分为若干词组，用逗号隔开。设$W$为窗口的长度。此时算法描述如下：假定已经将字符串压缩到时刻$i-1$,然后，为了找到下一个词组，先计算最大的$k$，使得对某个$j$，$i-1-W\le j \le i-1$, 长度为$k$ 并起始于$x_j$的字符串等于起始于$x_j$的字符串（长度为$k$）（即对任意的$0\le l < k$, 有 $x_{j+l} = x_{i+l}$).于是，下一个词组的长度为k（即$x_i\cdots x_{i+k-1}$ ）,且表示为二元对（P,L），其中P为匹配的起始位置，L为匹配的长度。如果窗口中没有找到匹配，则下一个字符将无压缩地被发送。为区分这两种情形，需要一个标识位。因此词组有两种类型：（F,P,L）或（F,C），其中C表示未压缩的字符。\\ \par
+        注意，（指针，长度）对的目标表示可能延伸超出窗口，从而导致与新的词组重叠。在理论上，这样的匹配可以任意长。而在实际中，最大词组长度限制为不能超过某个参数。\\ \par
+        这个算法好比使用了一个字典，它由窗中字符串的所有子串与所有单字符构成。算法是要找到字典内的最长匹配，并且分配一个指针给这个匹配。而且这个LZ77算法被证明为了渐进最优的，gzip和pkzip都是LZ77这个版本。
+    \begin{algorithm}[!htbp]  
+      \caption{LZ77算法}  
+      \label{alg:LZ77算法}  
+      \begin{algorithmic}[1]  
+        \State begin
+        \State \quad fill view from input
+        \State \quad while (view is not empty) do 
+        \State \quad begin
+        \State \quad \quad find longest prefix p of view starting in coded part
+        \State \quad \quad i := position of p in window
+        \State \quad \quad j := length of p
+        \State \quad \quad X := first char after p in view
+        \State \quad \quad output(i,j,X)
+        \State \quad \quad add j+1 chars
+        \State \quad end
+        \State end 
+      \end{algorithmic}  
+    \end{algorithm}  
+
+    \end{subsection}
+
+\end{section}
+
+
+\begin{section}{并行算法}
+	 \begin{subsection}{并行思路} 
+	 \label{sub:detail}
+        本实验中使用LZ77算法对文件进行压缩。我们并行的思路也是相当简单，就是通过牺牲部分压缩率，来提升执行时间，在其中找到一个trade-off. 首先，我们对需要压缩的文件进行一个拆分，然后利用并行对子文件进行压缩，再将文件进行合并，得到最后的压缩文件。
+        而解压则是一个更加顺利的过程，将压缩后的文件分成多个子文件，再分别压缩，最后合成原来的文件，从而得到正确的原文件。
+	 \end{subsection}
+	 
+	 \begin{subsection}{并行算法实现细节}
+	 	\begin{enumerate}
+        \item Naive LZ77: 通过Hash表表示字典+朴素字符串匹配，实现LZ77算法
+        \item OpenMP: 在LZ77 Hash的基础上进行OpenMP进行并行处理,将文件分拆
+    \end{enumerate}
+    数据源：通过generator生成若干连续的数字，来进行压缩、解压
+    \end{subsection}
+
+    \subsection{并行算法分析}
+      LZ77压缩算法主要核心部分是字符串比较，用OpenMP是比较合适的，是一个SPMD的模型。因此在这里分割文件，并匹配前n位字符，就可以达到一个较为不错的并行速度，通过选取合适的线程数，可以很好的实现执行时间和压缩率的一个权衡。\\ \par
+      同时，据文献查询，在GPU上实现LZ77数据压缩并不是一个好的选择，因为LZ77算法含大量的内存比较和I/O操作，不符合GPU的架构特性，所以在GPU上执行数据压缩的速度不如CPU上，而增加CPU和GPU间的内存带宽是更好发挥GPU特性的一种方法。 
+
+ \end{section}
+
+  \begin{section}{实验结果}
+  在测试环节，我们采用文本文件进行测试。测试平台为Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz,cache size : 25600 KB,测试结果如下：\\
+   \begin{center}
+    \begin{tabular}{|l|ccc|}
+
+        \hline
+        \diagbox{线程}{数据}{项目} & 时间 & 加速比 & 效率 \\
+        \hline
+        1 & 122.95 & 1 & 1\\
+        2 & 52.94 & 2.32 & 1.16\\
+        4 & 27.07 & 4.54 & 1.14\\
+        8 & 14.92 & 8.24 & 1.03\\
+        \hline
+        \end{tabular}
+    \end{center}
+        \par  我们可以看到采用OpenMP加速有明显的效果，同时达到了很高的效率。我们可以看到，吞吐量相比串行程序是有大幅提升的，我们认为基于OpenMP的实现还是能很高效地实现并行的,这是基于CPU多线程的高效IO处理能力，使得吞吐量得到大幅度提升。\\ 
+        \par 但压缩率来说，并没有明显的大幅提升，基本上对于重复率较高的文本文件，几乎能达到50\%的压缩率，对比起商用软件可以达到的40\%压缩率还是有待提升的。但如果对稠密的二进制文件基本压缩率都是相当低的。同时由于引入一些附加信息，压缩文件会比原来更大一些。这还是有相当多的其他路径可以进行处理，比如提升算法的精细程度，或者引入Huffman编码。
+
+
+  \end{section}
+%----------------------------------------------------------------------------------------
+%	CITATION SECTION
+%----------------------------------------------------------------------------------------
+\bibliography{a}
+\bibliographystyle{plain}
+\nocite{Cover2003Elements}
+\nocite{Cockburn2007Method}
+\end{document}

@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.16)  28 JUN 2017 02:42
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.16)  28 JUN 2017 04:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Problem-Huan.tex
-(./Problem-Huan.tex
+**report.tex
+(./report.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
@@ -1414,13 +1414,12 @@ File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2015/05/10 v1.29 Asymptote style file for LaTeX
 
-(./Problem-Huan.pre)
+(./report.pre)
 \ASYbox=\box58
 \c@asy=\count181
 \AsyStream=\write4
 \AsyPreStream=\write5
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/catchfile.sty
@@ -1429,7 +1428,7 @@ Package: catchfile 2011/03/01 v1.6 Catch the contents of a file (HO)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/everypage/everypage.sty
 Package: everypage 2007/06/20 1.1 Hooks to run on every page
 )
-\openout5 = `Problem-Huan.pre'.
+\openout5 = `report.pre'.
 
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/algorithms/algorithm.sty
@@ -1467,34 +1466,141 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip62
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (./Problem-Huan.aux)
-\openout1 = `Problem-Huan.aux'.
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count191
+\lst@gtempboxa=\box61
+\lst@token=\toks40
+\lst@length=\count192
+\lst@currlwidth=\dimen294
+\lst@column=\count193
+\lst@pos=\count194
+\lst@lostspace=\dimen295
+\lst@width=\dimen296
+\lst@newlines=\count195
+\lst@lineno=\count196
+\lst@maxwidth=\dimen297
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 41.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 41.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count197
+\lst@skipnumbers=\count198
+\lst@framebox=\box62
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
+(/usr/local/texlive/2015/texmf-dist/tex/latex/diagbox/diagbox.sty
+Package: diagbox 2016/02/24 v2.1 Making table heads with diagonal lines
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pict2e/pict2e.sty
+Package: pict2e 2016/02/05 v0.3b Improved picture commands (HjG,RN,JT)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pict2e/pict2e.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: xetex.def on input line 119.
+Package pict2e Info: Driver file for pict2e: p2e-xetex.def on input line 121.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pict2e/p2e-xetex.def
+File: p2e-xetex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+)
+\pIIe@GRAPH=\toks41
+\@arclen=\dimen298
+\@arcrad=\dimen299
+\@tempdimd=\dimen300
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp.sty
+Package: fp 1995/04/02
+
+`Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/defpattern.sty
+Package: defpattern 1994/10/12
+\actioncount=\count199
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-basic.sty
+Package: fp-basic 1996/05/13
+\FP@xs=\count266
+\FP@xia=\count267
+\FP@xib=\count268
+\FP@xfa=\count269
+\FP@xfb=\count270
+\FP@rega=\count271
+\FP@regb=\count272
+\FP@regs=\count273
+\FP@times=\count274
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-addons.sty
+Package: fp-addons 1995/03/15
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-snap.sty
+Package: fp-snap 1995/04/05
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-exp.sty
+Package: fp-exp 1995/04/03
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-trigo.sty
+Package: fp-trigo 1995/04/14
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-pas.sty
+Package: fp-pas 1994/08/29
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-random.sty
+Package: fp-random 1995/02/23
+\FPseed=\count275
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-eqn.sty
+Package: fp-eqn 1995/04/03
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-upn.sty
+Package: fp-upn 1996/10/21
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-eval.sty
+Package: fp-eval 1995/04/03
+))
+\diagbox@boxa=\box63
+\diagbox@boxb=\box64
+\diagbox@boxm=\box65
+\diagbox@wd=\dimen301
+\diagbox@ht=\dimen302
+\diagbox@insepl=\dimen303
+\diagbox@insepr=\dimen304
+\diagbox@outsepl=\dimen305
+\diagbox@outsepr=\dimen306
+)
+(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
+Package: xeCJK-listings 2016/02/10 v3.3.4 xeCJK patch file for listings
+\l__xeCJK_listings_max_char_int=\count276
+\l__xeCJK_listings_flag_int=\count277
+)
+(./report.aux)
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 67.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 67.
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    ... okay on input line 67.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1530,23 +1636,23 @@ LaTeX Font Info:    ... okay on input line 41.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box61
-Package hyperref Info: Link coloring ON on input line 41.
+\AtBeginShipoutBox=\box66
+Package hyperref Info: Link coloring ON on input line 67.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count191
+\c@section@level=\count278
 )
-LaTeX Info: Redefining \ref on input line 41.
-LaTeX Info: Redefining \pageref on input line 41.
-LaTeX Info: Redefining \nameref on input line 41.
+LaTeX Info: Redefining \ref on input line 67.
+LaTeX Info: Redefining \pageref on input line 67.
+LaTeX Info: Redefining \nameref on input line 67.
 
-(./Problem-Huan.out) (./Problem-Huan.out)
+(./report.out) (./report.out)
 \@outlinefile=\write6
-\openout6 = `Problem-Huan.out'.
+\openout6 = `report.out'.
 
 .................................................
 . fontspec info: "setup-math"
@@ -1555,191 +1661,128 @@ LaTeX Info: Redefining \nameref on input line 41.
 .................................................
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 41.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 41.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 41.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 41.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 41.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 41.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 41.
-LaTeX Font Info:    Redeclaring math accent \check on input line 41.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 41.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 41.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 41.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 41.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 41.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 67.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 67.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 67.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 67.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 67.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 67.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 67.
+LaTeX Font Info:    Redeclaring math accent \check on input line 67.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 67.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 67.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 67.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 67.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 67.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 41.
+(Font)              `operators' in the math version `normal' on input line 67.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> EU1/TimesNewRoman(0)/m/n on input line 
-41.
+67.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 41.
+(Font)              `operators' in the math version `bold' on input line 67.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> EU1/TimesNewRoman(0)/m/n on input line
- 41.
+ 67.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  EU1/TimesNewRoman(0)/m/n --> EU1/TimesNewRoman(0)/m/n o
-n input line 41.
+n input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> EU1/TimesNewRoman(0)/m/it on input lin
-e 41.
+e 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> EU1/TimesNewRoman(0)/bx/n on input lin
-e 41.
+e 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> EU1/Arial(0)/m/n on input line 41.
+(Font)                  OT1/cmss/m/n --> EU1/Arial(0)/m/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 41.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 67.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  EU1/TimesNewRoman(0)/m/n --> EU1/TimesNewRoman(0)/bx/n 
-on input line 41.
+on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> EU1/TimesNewRoman(0)/bx/it on input l
-ine 41.
+ine 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> EU1/Arial(0)/bx/n on input line 41.
+(Font)                  OT1/cmss/bx/n --> EU1/Arial(0)/bx/n on input line 67.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 41.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 67.
+ ABD: EveryShipout initializing macros
+\c@lstlisting=\count279
 
-ABD: EveryShipout initializing macros
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 70--70
+Underfull \hbox (badness 10000) in paragraph at lines 86--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--74
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
+Underfull \hbox (badness 10000) in paragraph at lines 95--95
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--96
 
  []
 
 [1
 
 ]
-Overfull \hbox (4.35631pt too wide) in paragraph at lines 78--79
-\EU1/TimesNewRoman(0)/m/n/12 Beta distribution as our prior distribution Beta(a
-,b) and the posterior distribution is Beta(a+nx,b+n(1-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+Underfull \hbox (badness 10000) in paragraph at lines 97--97
 
  []
 
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 98.
-\c@theorem=\count192
+put line 100.
 [2]
-
-LaTeX Warning: Citation `Kaufmann2012On' on page 3 undefined on input line 124.
-
-
-
-LaTeX Warning: Citation `Kaufmann2016On' on page 3 undefined on input line 135.
-
-
-
-LaTeX Warning: Citation `Garivier2013The' on page 3 undefined on input line 144
-.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 144--145
-
- []
-
-[3]
-
-LaTeX Warning: Citation `Kaufmann2016On' on page 4 undefined on input line 153.
-
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+Underfull \hbox (badness 10000) in paragraph at lines 139--139
 
  []
 
 
-LaTeX Warning: Citation `Kaufmann2016On' on page 4 undefined on input line 155.
-
-
-
-LaTeX Warning: Citation `Kaufmann2016On' on page 4 undefined on input line 157.
-
-
-
-LaTeX Warning: Citation `Kaufmann2016On' on page 4 undefined on input line 161.
-
-
-
-Overfull \hbox (1.89368pt too wide) in paragraph at lines 169--170
-[]\EU1/TimesNewRoman(0)/m/n/12 We apply game theory framework to such problems.
- Different from previous model like Cournot
- []
-
-[4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 239--239
+Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--241
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 243--243
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 245--245
-
- []
-
-No file Problem-Huan.bbl.
-
-LaTeX Warning: Citation `Czarnecki2015' undefined on input line 256.
-
-
-LaTeX Warning: Citation `Auer2002Finite' undefined on input line 257.
-
-[7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 260.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 260.
- (./Problem-Huan.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 260.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 260.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 260.
+(./report.bbl) [3]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 171.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 171.
+ (./report.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 171.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 171.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 171.
  ) 
 Here is how much of TeX's memory you used:
- 35412 strings out of 493638
- 686684 string characters out of 6144792
- 684506 words of memory out of 5000000
- 38381 multiletter control sequences out of 15000+600000
- 9038 words of font info for 65 fonts, out of 8000000 for 9000
+ 37569 strings out of 493638
+ 719452 string characters out of 6144792
+ 740405 words of memory out of 5000000
+ 40466 multiletter control sequences out of 15000+600000
+ 9078 words of font info for 70 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 55i,9n,72p,10488b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,14n,72p,10482b,506s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Problem-Huan.pdf (7 pages).
+Output written on report.pdf (3 pages).
