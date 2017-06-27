@@ -377,7 +377,7 @@ void Compress(const char *memblock, const int size, const std::string &fn)
     BitBuffer bits(filename);
     HashTable hash;
     int j = 0;
-    int thread = 2;
+    int thread = 8;
     int group = size / thread;
     int i = 0, cc_size = 0 ;
     
